@@ -5,10 +5,13 @@ import "./navigation.styles.scss";
 import userEvent from "@testing-library/user-event";
 import { UserContext } from "../../context/user.context";
 import { signOutUser } from "../../utils/firebase.util";
+import ShopIcon from "../../components/shop-icon/shop-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
+import { CartContext } from "../../context/cart.context";
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
   console.log(currentUser);
-
+  const {isCartOpen} = useContext(CartContext)
  
   return (
     <Fragment>
@@ -30,7 +33,10 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
+
+          <ShopIcon />
         </div>
+        {isCartOpen && <CartDropdown /> }
       </div>
       <Outlet />
     </Fragment>
